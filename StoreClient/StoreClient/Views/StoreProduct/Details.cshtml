@@ -1,0 +1,66 @@
+@model StoreClient.Models.StoreProduct?
+
+@{
+    ViewData["Title"] = "Информация о товаре";
+}
+
+<div class="container mt-4">
+
+    <h1>Информация о товаре</h1>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+
+        <a asp-action="Index"
+           class="btn btn-secondary">
+            Вернуться к списку
+        </a>
+    }
+    else if (Model != null)
+    {
+        <div class="card mt-4">
+
+            <div class="card-body">
+
+                <h3>@Model.Name</h3>
+
+                <p>
+                    <strong>ID:</strong>
+                    @Model.Id
+                </p>
+
+                <p>
+                    <strong>Описание:</strong>
+                    @Model.Description
+                </p>
+
+                <p>
+                    <strong>Цена:</strong>
+                    @Model.Price.ToString("N0") ₸
+                </p>
+
+                <p>
+                    <strong>Количество:</strong>
+                    @Model.Quantity
+                </p>
+
+                <a asp-action="Edit"
+                   asp-route-id="@Model.Id"
+                   class="btn btn-warning">
+                    Изменить
+                </a>
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+                    Назад
+                </a>
+
+            </div>
+
+        </div>
+    }
+
+</div>

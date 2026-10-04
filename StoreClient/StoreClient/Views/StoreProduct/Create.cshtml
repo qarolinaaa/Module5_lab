@@ -1,0 +1,96 @@
+@model StoreClient.Models.StoreProduct
+
+@{
+    ViewData["Title"] = "Добавление товара";
+}
+
+<div class="container mt-4">
+
+    <h1>Добавление товара</h1>
+
+    <form asp-action="Create"
+          method="post"
+          class="mt-4">
+
+        @Html.AntiForgeryToken()
+
+        <div asp-validation-summary="ModelOnly"
+             class="text-danger mb-3">
+        </div>
+
+        <div class="mb-3">
+
+            <label asp-for="Name"
+                   class="form-label">
+                Название
+            </label>
+
+            <input asp-for="Name"
+                   class="form-control" />
+
+            <span asp-validation-for="Name"
+                  class="text-danger">
+            </span>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label asp-for="Description"
+                   class="form-label">
+                Описание
+            </label>
+
+            <textarea asp-for="Description"
+                      class="form-control"></textarea>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label asp-for="Price"
+                   class="form-label">
+                Цена
+            </label>
+
+            <input asp-for="Price"
+                   type="number"
+                   step="0.01"
+                   class="form-control" />
+
+            <span asp-validation-for="Price"
+                  class="text-danger">
+            </span>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label asp-for="Quantity"
+                   class="form-label">
+                Количество
+            </label>
+
+            <input asp-for="Quantity"
+                   type="number"
+                   class="form-control" />
+
+            <span asp-validation-for="Quantity"
+                  class="text-danger">
+            </span>
+
+        </div>
+
+        <button type="submit"
+                class="btn btn-success">
+            Добавить
+        </button>
+
+        <a asp-action="Index"
+           class="btn btn-secondary">
+            Отмена
+        </a>
+
+    </form>
+
+</div>

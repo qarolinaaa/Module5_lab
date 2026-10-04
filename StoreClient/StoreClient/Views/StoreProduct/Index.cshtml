@@ -1,0 +1,108 @@
+@model List<StoreClient.Models.StoreProduct>
+
+@{
+    ViewData["Title"] = "Список товаров";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between
+                align-items-center mb-4">
+
+        <h1>Список товаров</h1>
+
+        <a asp-action="Create"
+           class="btn btn-success">
+            Добавить товар
+        </a>
+    </div>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+
+    <table class="table table-bordered
+                  table-striped">
+
+        <thead class="table-dark">
+
+            <tr>
+                <th>ID</th>
+                <th>Название</th>
+                <th>Описание</th>
+                <th>Цена</th>
+                <th>Количество</th>
+                <th>Действия</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @foreach (var product in Model)
+            {
+                <tr>
+
+                    <td>@product.Id</td>
+
+                    <td>@product.Name</td>
+
+                    <td>@product.Description</td>
+
+                    <td>
+                        @product.Price.ToString("N0") ₸
+                    </td>
+
+                    <td>@product.Quantity</td>
+
+                    <td>
+
+                        <a asp-action="Details"
+                           asp-route-id="@product.Id"
+                           class="btn btn-info btn-sm">
+                            Просмотр
+                        </a>
+
+                        <a asp-action="Edit"
+                           asp-route-id="@product.Id"
+                           class="btn btn-warning btn-sm">
+                            Изменить
+                        </a>
+
+                        <form asp-action="Delete"
+                              asp-route-id="@product.Id"
+                              method="post"
+                              style="display:inline;"
+                              onsubmit="return confirm(
+                                  'Вы уверены, что хотите удалить этот товар?'
+                              );">
+
+                            @Html.AntiForgeryToken()
+
+                            <button type="submit"
+                                    class="btn btn-danger btn-sm">
+                                Удалить
+                            </button>
+
+                        </form>
+
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+</div>
